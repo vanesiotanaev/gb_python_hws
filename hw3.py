@@ -36,35 +36,59 @@
 # Напишите программу, которая найдёт разницу между максимальным и минимальным значением дробной части элементов.
 # (минимальное значение дробной части отличное от нуля, у целых чисел дробной части нет их в расчет не берем)
 
-def max_min_difference(list):
-    new_list = []
-    difference = 0
-    for item in list:
-        a = str(int(item // 1))
-        b = str(item)
-        round_len = len(b) - len(a) - 1
-        if item % 1 != 0:
-            new_list.append(round(item % 1, round_len))
-    difference = find_max(new_list) - find_min(new_list)
+# def max_min_difference(list):
+#     new_list = []
+#     difference = 0
+#     for item in list:
+#         a = str(int(item // 1))
+#         b = str(item)
+#         round_len = len(b) - len(a) - 1
+#         if item % 1 != 0:
+#             new_list.append(round(item % 1, round_len))
+#     difference = find_max(new_list) - find_min(new_list)
 
-    return difference
+#     return difference
 
-def find_min(list):
-    min = list[0]
-    for item in list:
-        if item <= min:
-            min = item
+# def find_min(list):
+#     min = list[0]
+#     for item in list:
+#         if item <= min:
+#             min = item
     
-    return min
+#     return min
 
-def find_max(list):
-    max = list[0]
-    for item in list:
-        if item >= max:
-            max = item
+# def find_max(list):
+#     max = list[0]
+#     for item in list:
+#         if item >= max:
+#             max = item
     
-    return max
+#     return max
 
-user_list = [1.1, 1.2, 3.1, 5, 10.01]
-result = max_min_difference(user_list)
-print(f'Разница между максимальным и минимальным значением дробной части элементов списка {user_list} равна {result}')
+# user_list = [1.1, 1.2, 3.1, 5, 10.01]
+# result = max_min_difference(user_list)
+# print(f'Разница между максимальным и минимальным значением дробной части элементов списка {user_list} равна {result}')
+
+# 4. Напишите программу, которая будет преобразовывать десятичное число в двоичное.
+
+def decimal_to_binary(value):
+    binary_list = []
+    while value > 0:
+        binary_list.append(value % 2)
+        value //= 2
+    i = 0
+    j = len(binary_list) - 1
+    
+    while i < j:
+        temp = binary_list[i]
+        binary_list[i] = binary_list[j]
+        binary_list[j] = temp
+        i += 1
+        j -= 1
+        binary_string = ''
+    for item in binary_list:
+        binary_string += str(item)
+
+    return binary_string
+
+print(decimal_to_binary(75))
