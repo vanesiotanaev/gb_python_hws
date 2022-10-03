@@ -101,7 +101,7 @@ def also_negative_fibonacci(value):
         positive_list = [0, 1]
         for n in range(2, value + 1):
             positive_list.append(positive_list[n - 1] + positive_list[n - 2])
-        negative_list = list(positive_list) # Важно! Чтобы списки не были связаны и не содержали одно и тоже, нужно скопировать
+        negative_list = list(positive_list) # Важно! Чтобы списки не были связаны и не содержали одно и то же, нужно скопировать
                                             # в negative_list содержимое positive_list через list() !!!!!!!!!!!!!!!!!!!!!!!!!!!
         for n in range (2, len(negative_list), 2):
             negative_list[n] *= (-1)
