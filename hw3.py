@@ -94,35 +94,58 @@
 # print(decimal_to_binary(75))
 
 # 5. Задайте число. Составьте список чисел Фибоначчи, в том числе для отрицательных индексов.
-def also_negative_fibonacci(value):
-    if value != 0:
-        positive_list = [0, 1]
-        for n in range(2, value + 1):
-            positive_list.append(positive_list[n - 1] + positive_list[n - 2])
-        negative_list = list(positive_list) # Важно! Чтобы списки не были связаны и не ссылались на один и тот же список, нужно скопировать
-                                            # в negative_list содержимое positive_list через list() !!!!!!!!!!!!!!!!!!!!!!!!!!!
-        for n in range (2, len(negative_list), 2):
-            negative_list[n] *= (-1)
-        negative_list.pop(0)
+# def also_negative_fibonacci(value):
+#     if value != 0:
+#         positive_list = [0, 1]
+#         for n in range(2, value + 1):
+#             positive_list.append(positive_list[n - 1] + positive_list[n - 2])
+#         negative_list = list(positive_list) # Важно! Чтобы списки не были связаны и не ссылались на один и тот же список, нужно скопировать
+#                                             # в negative_list содержимое positive_list через list() !!!!!!!!!!!!!!!!!!!!!!!!!!!
+#         for n in range (2, len(negative_list), 2):
+#             negative_list[n] *= (-1)
+#         negative_list.pop(0)
 
-        i = 0
-        j = len(negative_list) - 1
-        while i < j:
-            temp = negative_list[i]
-            negative_list[i] = negative_list[j]
-            negative_list[j] = temp
-            i += 1
-            j -= 1
+#         i = 0
+#         j = len(negative_list) - 1
+#         while i < j:
+#             temp = negative_list[i]
+#             negative_list[i] = negative_list[j]
+#             negative_list[j] = temp
+#             i += 1
+#             j -= 1
 
-        full_list = negative_list + positive_list
-        print(full_list)
+#         full_list = negative_list + positive_list
+#         print(full_list)
 
-        return full_list
-    else:
-        print("Последовательности Фибоначчи для 0 элементов не существует! ")
-
-
+#         return full_list
+#     else:
+#         print("Последовательности Фибоначчи для 0 элементов не существует! ")
 
 
-user_value = int(input("Введите число: "))
-also_negative_fibonacci(user_value)
+
+
+# user_value = int(input("Введите число: "))
+# also_negative_fibonacci(user_value)
+
+# 6. НЕОБЯЗАТЕЛЬНОЕ ЗАДАНИЕ
+# Реализуйте алгоритм задания случайных чисел без использования встроенного генератора псевдослучайных чисел.
+
+# Первый вариант.
+
+import time
+
+def create_pseudo_random_number(digits):
+    random = 1
+    a = time.time()
+    if round(a) % 2 == 0:
+        random *= (-1)
+    a = str(a % 1)
+    a = a[2:2+digits]
+
+    random *= int(a)
+    print(random)
+    return random
+
+user_digits = int(input("Введите желаемое кол-во разрядов случайного числа: "))
+create_pseudo_random_number(user_digits)
+
