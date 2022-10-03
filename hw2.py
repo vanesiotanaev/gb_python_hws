@@ -56,53 +56,53 @@
 
 # Задайте список из N элементов, заполненных числами из промежутка [-N, N]. 
 # Найдите произведение элементов на указанных позициях. Позиции хранятся в файле file.txt в одной строке одно число.
-import random
-
-def CreateList(n):
-    list = []
-    for i in range(n):
-        list.append(random.randint(-n, n))
-
-    print(list)
-    
-    return list
-
-def FindElements(list):
-    multiplication = 1
-    file = open('file.txt', 'r')
-    for line in file:
-        a = int(str(line))
-        if a < len(list):
-            print(f"Под индексом {a} в списке находится элемент {list[a]}!")
-            multiplication *= list[a]
-        else:
-            print(f"Элемента с индексом {a} не существует в списке размером {len(list)}!")
-            
-    print(f"Произведение найденных элементов равно {multiplication}!")
-
-user_n = int(input('Введите число N: '))
-user_list = CreateList(user_n)
-FindElements(user_list)
-
-# # 5. Реализуйте алгоритм перемешивания списка.
-
 # import random
 
-# def MixList(list):
-#     new_list = []
-#     while len(new_list) < len(list):
-#         rand = random.choice(list)
-#         while not rand in new_list:
-#             new_list.append(rand)
+# def CreateList(n):
+#     list = []
+#     for i in range(n):
+#         list.append(random.randint(-n, n))
+
+#     print(list)
+    
+#     return list
+
+# def FindElements(list):
+#     multiplication = 1
+#     file = open('file.txt', 'r')
+#     for line in file:
+#         a = int(str(line))
+#         if a < len(list):
+#             print(f"Под индексом {a} в списке находится элемент {list[a]}!")
+#             multiplication *= list[a]
+#         else:
+#             print(f"Элемента с индексом {a} не существует в списке размером {len(list)}!")
+            
+#     print(f"Произведение найденных элементов равно {multiplication}!")
+
+# user_n = int(input('Введите число N: '))
+# user_list = CreateList(user_n)
+# FindElements(user_list)
+
+# 5. Реализуйте алгоритм перемешивания списка.
+
+import random
+
+def MixList(list):
+    new_list = []
+    while len(new_list) < len(list):
+        rand = random.choice(list)
+        while not rand in new_list:
+            new_list.append(rand)
         
-#     return new_list
+    return new_list
 
 
 
-# user_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-# print()
-# print(f"Default-список выглядит так: {user_list}")
-# print()
-# new_user_list = MixList(user_list)
-# print(f"Перемешанный список выглядит так: {new_user_list}")
-# print()
+user_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print()
+print(f"Default-список выглядит так: {user_list}")
+print()
+new_user_list = MixList(user_list)
+print(f"Перемешанный список выглядит так: {new_user_list}")
+print()
