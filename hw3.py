@@ -94,8 +94,6 @@
 # print(decimal_to_binary(75))
 
 # 5. Задайте число. Составьте список чисел Фибоначчи, в том числе для отрицательных индексов.
-import copy
-
 def also_negative_fibonacci(value):
     if value != 0:
         positive_list = [0, 1]
