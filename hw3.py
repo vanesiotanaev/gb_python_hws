@@ -134,18 +134,33 @@
 
 import time
 
-def create_pseudo_random_number(digits):
-    random = 1
-    a = time.time()
-    if round(a) % 2 == 0:
-        random *= (-1)
-    a = str(a % 1)
-    a = a[2:2+digits]
+def create_pseudo_random_value():
+    sign = 1
+    check1 = int(str(time.time() % 1)[5:6])
+    if check1 <= 5:
+        sign = -1
+    time.sleep(0.001)
+    multiplier = (time.time() % 1)
+    time.sleep(0.001)
+    value = (time.time() + multiplier) * multiplier
+    check2 = str(value % 1)
+    digits = int(check2[2:3])
+    if digits == 0:
+        final_random_value = 0
+    else:
+        final_random_value = int(str(value % 1)[2:2+digits])
+        final_random_value *= sign
+    
+    return final_random_value
 
-    random *= int(a)
-    print(random)
-    return random
+def create_random_list(size):
+    list = []
+    list.append(create_pseudo_random_value())
+    for i in range(0, size):
+        list.append(create_pseudo_random_value())
 
-user_digits = int(input("Введите желаемое кол-во разрядов случайного числа: "))
-create_pseudo_random_number(user_digits)
+    return list
+
+user_list = create_random_list(7)
+print(user_list)
 
