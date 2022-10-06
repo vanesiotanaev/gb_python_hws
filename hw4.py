@@ -144,20 +144,25 @@ def generate_equation(k):
         elif dictionary[key] > 1 and key == 1:
             equation += f'{str(dictionary[key])}x{random.choice(plus_minus)}'
         elif dictionary[key] == 1 and key == 1:
-            equation += 'x'
+            equation += f'x{random.choice(plus_minus)}' 
         elif dictionary[key] > 1 and key == 0:
             equation += f'{str(dictionary[key])}'
         elif dictionary[key] == 0:
             key -= 1
     if equation[-1] == '0':
-        equation = equation[:-3]
-    elif equation[-1] == '+' or '-':
-        equation = equation[:-2]              
+        equation = equation[:-1]
+    elif equation[-1] == '+' or equation[-1] == '-':
+        equation = equation[:-1]              
     equation += '=0'
 
     return equation
 
-
-
 user_k = int(input("Введите натуральную степень k: "))
-print(generate_equation(user_k))
+user_equation = generate_equation(user_k)
+print(user_equation)
+
+# !!! Как записать в файл закодированную в UTF-8 строку !!!
+path = 'file4.txt'
+file = open(path, 'w', encoding='utf-8') 
+file.write(user_equation)
+file.close()
