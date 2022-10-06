@@ -8,7 +8,20 @@
 # Результат:
 # 40x⁹ - x⁸ -5x⁷ + 15x⁶ +5x⁴ + 5x³ + x² - 13x¹ + 53 = 0
 
-indexes = {"0": "\u2070",
+# Функция для открытия файла (чтобы он правильно считывался, имеем в виду кодировку)
+
+def open_encoded_file(path):
+    file = open(path, 'r', encoding='utf-8')
+    char_list = ''
+    for line in file:
+        for item in line:
+            char_list += item
+    
+    return char_list
+
+def create_code_values_list():
+    # Делаем из словаря список со значениями (без ключей)
+    code_values_dict = {"0": "\u2070",
            "1": "\u00B9",
            "2": "\u00B2",
            "3": "\u00B3",
@@ -19,58 +32,76 @@ indexes = {"0": "\u2070",
            "8": "\u2078",
            "9": "\u2079"
            }
-# Делаем из словаря список со значениями (без ключей)
+    code_values_list = list(code_values_dict.values())
 
-list_indexes = list(indexes.values())
-dictionary = {}
+    return code_values_list
 
-# Открываем файл, но, чтобы он правильно считывался, имеем в виду кодировку
+def create_dictionary_keys(char_list, check_list):
+    dictionary = {}
+    # Пройдемся по каждому элементу строки
+    for item in range(0, len(char_list)):
+        if char_list[item] in check_list:
+            dictionary[char_list[item]] = None
+    
+    return dictionary
 
-path = 'file4_1.txt'
-file = open(path, 'r', encoding='utf-8')
-char_list = ''
-for line in file:
-    for item in line:
-        char_list += item
+def create_primary_coeff_string(char_list, check_list):
+    primary_coeff_string = ''
+    for i in range(len(char_list)):
+        if (char_list[i] == 'x' and (char_list[i-1] == '+')):
+            primary_coeff_string += '1'
+        if (char_list[i].isdigit() == True and (not char_list[i] in check_list)) or (char_list[i] == '-'):
+            primary_coeff_string += char_list[i]
+        else:
+            primary_coeff_string += ' '
+    
+    return primary_coeff_string
 
-# Пройдемся по каждому элементу строки
-new_char_string = ''
-for item in range(0, len(char_list)):
-    if char_list[item] in list_indexes:
-        dictionary[char_list[item]] = None
-print(dictionary)
+def create_secondary_coeff_list(coeff_string):
+    coeff_list = coeff_string.split(' ')
+    coeff_list.remove('0')
+    secondary_coefficients_list = []
+    for element in coeff_list:
+        if element != '':
+            secondary_coefficients_list.append(element)
+    for i in range(0, len(secondary_coefficients_list)):
+        if secondary_coefficients_list[i] == '-':
+            secondary_coefficients_list[i] = -1
+    for i in range(0, len(secondary_coefficients_list)):
+        secondary_coefficients_list[i] = int(secondary_coefficients_list[i])
+    
+    return secondary_coefficients_list
 
-digits = ''
-for i in range(len(char_list)):
-    if (char_list[i] == 'x' and (char_list[i-1] == '+')):
-        digits += '1'
-    if (char_list[i].isdigit() == True and (not char_list[i] in list_indexes)) or (char_list[i] == '-'):
-        digits += char_list[i]
-    else:
-        digits += ' '
-print(digits)
-
-digits_list = digits.split(' ')
-digits_list.remove('0')
-
-coefficients = []
-for element in digits_list:
-    if element != '':
-        coefficients.append(element)
-for i in range(0, len(coefficients)):
-    if coefficients[i] == '-':
-        coefficients[i] = -1
-for i in range(0, len(coefficients)):
-    coefficients[i] = int(coefficients[i])
-print(coefficients)
-count = 0
-for i in dictionary:
-    for j in range(count, len(coefficients)):
-        dictionary[i] = coefficients[j]
-        count += 1
-        break
+def create_complete_dict(dictionary, coefficients):
+    count = 0
+    for i in dictionary:
+        for j in range(count, len(coefficients)):
+            dictionary[i] = coefficients[j]
+            count += 1
+            break
         
-print(dictionary)
+    return dictionary
+
+
+
+char_list_1 = open_encoded_file('file4_1.txt')
+char_list_2 = open_encoded_file('file4_2.txt')
+
+special_list = create_code_values_list()
+dictionary_keys_1 = create_dictionary_keys(char_list_1, special_list)
+dictionary_keys_2 = create_dictionary_keys(char_list_2, special_list)
+
+primary_coefficients_1 = create_primary_coeff_string(char_list_1, special_list)
+primary_coefficients_2 = create_primary_coeff_string(char_list_2, special_list)
+
+secondary_coefficients_1 = create_secondary_coeff_list(primary_coefficients_1)
+secondary_coefficients_2 = create_secondary_coeff_list(primary_coefficients_2)
+
+full_dict_1 = create_complete_dict(dictionary_keys_1, secondary_coefficients_1)
+full_dict_2 = create_complete_dict(dictionary_keys_2, secondary_coefficients_2)
+print(full_dict_1)
+print(full_dict_2)
+
 # Конвертация
 # for item in range(0, len(char_list)):
 #   if char_list[item] in list_indexes:
