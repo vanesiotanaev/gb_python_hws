@@ -142,11 +142,11 @@
 #         elif dictionary[key] == 1 and key > 1:
 #             equation += f'x{degree(key)}{random.choice(plus_minus)}'
 #         elif dictionary[key] > 1 and key == 1:
-#             equation += f'{str(dictionary[key])}x{random.choice(plus_minus)}'
+#             equation += f'{str(dictionary[key])}x{degree(key)}{random.choice(plus_minus)}'
 #         elif dictionary[key] == 1 and key == 1:
-#             equation += f'x{random.choice(plus_minus)}' 
+#             equation += f'x{degree(key)}{random.choice(plus_minus)}' 
 #         elif dictionary[key] > 1 and key == 0:
-#             equation += f'{str(dictionary[key])}'
+#             equation += f'{str(dictionary[key])}x{degree(key)}'
 #         elif dictionary[key] == 0:
 #             key -= 1
 #     if equation[-1] == '0':
@@ -197,6 +197,7 @@ indexes = {"0": "\u2070",
 
 list_indexes = list(indexes.values())
 print(list_indexes)
+dictionary = {}
 
 # Открываем файл, но, чтобы он правильно считывался, имеем в виду кодировку
 
@@ -212,10 +213,35 @@ print(char_list)
 new_char_string = ''
 for item in range(0, len(char_list)):
     if char_list[item] in list_indexes:
-        for j in range(0, len(list_indexes)):
-            if list_indexes[j] == char_list[item]:
-                new_char_string += str(j)
-    else:
-        new_char_string += char_list[item]
-print(new_char_string)
+        dictionary[char_list[item]] = None
+print(dictionary)
 
+digits = ''
+for element in char_list:
+    if (element.isdigit() == True and (not element in list_indexes)) or (element == '-'):
+        digits += element
+    else:
+        digits += ' '
+
+digits_list = digits.split(' ')
+digits_list.remove('0')
+
+coefficients = []
+for element in digits_list:
+    if element != '':
+        coefficients.append(element)
+for i in range(0, len(coefficients)):
+    if coefficients[i] == '-':
+        coefficients[i] = -1
+for i in range(0, len(coefficients)):
+    coefficients[i] = int(coefficients[i])
+print(coefficients)
+# Конвертация
+# for item in range(0, len(char_list)):
+#   if char_list[item] in list_indexes:
+        # for j in range(0, len(list_indexes)):
+        #     if list_indexes[j] == char_list[item]:
+        #         new_char_string += str(j) # Перезаписываем в новую строку
+    # else:
+    #     new_char_string += char_list[item] 
+# print(new_char_string)
