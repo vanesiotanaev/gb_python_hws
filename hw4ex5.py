@@ -171,6 +171,17 @@ def dict_to_string(dictionary):
         
         return final_string
 
+def modify_string(equation):
+    clean_equation = ''
+    for i in range(len(equation)):
+        if equation[i] != "\u00B9":
+            clean_equation += equation[i]
+    
+        # else:
+        #     clean_equation += "1"
+    print(clean_equation)
+    print(equation[len(equation)-5])
+
 char_list_1 = open_encoded_file('file4_1.txt')
 char_list_2 = open_encoded_file('file4_2.txt')
 print(char_list_1)
@@ -196,6 +207,9 @@ sorted_dictionary = dict_sort(summed_dict)
 
 semi_final_string = dict_to_string(sorted_dictionary)
 print(semi_final_string)
+
+final_string = modify_string(semi_final_string)
+
 
 
 # Конвертация
