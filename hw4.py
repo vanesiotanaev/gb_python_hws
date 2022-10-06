@@ -104,85 +104,11 @@
 # многочлена и записать в файл многочлен степени k
 # k - максимальная степень многочлена, следующий степень следующего на 1 меньше и так до ноля
 # Коэффициенты расставляет random, поэтому при коэффициенте 0 просто пропускаем данную итерацию степени
-# import random
+import random
 
-# def degree(a):
+def degree(a):
     
-#     indexes = {"0": "\u2070",
-#            "1": "\u00B9",
-#            "2": "\u00B2",
-#            "3": "\u00B3",
-#            "4": "\u2074",
-#            "5": "\u2075",
-#            "6": "\u2076",
-#            "7": "\u2077",
-#            "8": "\u2078",
-#            "9": "\u2079",
-#            "-": "\u207B"
-#            }
-
-#     degrees = ""
-#     temp = str(a)
-#     for char in temp:
-#         degrees += indexes[char] or ""
-#     return degrees
-
-# def generate_equation(k):
-#     power_keys = []
-#     for i in range(k, -1, -1):
-#         power_keys.append(i)
-    
-#     equation = ''
-#     dictionary = dict.fromkeys(power_keys)
-#     plus_minus = ['-', '+']
-#     for key in dictionary:
-#         dictionary[key] = random.randint(0, 5)
-#         if dictionary[key] > 1 and key > 1:
-#             equation += f'{str(dictionary[key])}x{degree(key)}{random.choice(plus_minus)}'
-#         elif dictionary[key] == 1 and key > 1:
-#             equation += f'x{degree(key)}{random.choice(plus_minus)}'
-#         elif dictionary[key] > 1 and key == 1:
-#             equation += f'{str(dictionary[key])}x{degree(key)}{random.choice(plus_minus)}'
-#         elif dictionary[key] == 1 and key == 1:
-#             equation += f'x{degree(key)}{random.choice(plus_minus)}' 
-#         elif dictionary[key] > 1 and key == 0:
-#             equation += f'{str(dictionary[key])}x{degree(key)}'
-#         elif dictionary[key] == 0:
-#             key -= 1
-#     if equation[-1] == '0':
-#         equation = equation[:-1]
-#     elif equation[-1] == '+' or equation[-1] == '-':
-#         equation = equation[:-1]              
-#     equation += '=0'
-
-#     return equation
-
-# user_k = int(input("Введите натуральную степень k: "))
-# user_equation = generate_equation(user_k)
-# print(user_equation)
-
-# # !!! Как записать в файл закодированную в UTF-8 строку !!!
-# path = 'file4_1.txt'
-# file = open(path, 'w', encoding='utf-8') 
-# file.write(user_equation)
-# file.close()
-
-# path = 'file4_2.txt'
-# file = open(path, 'w', encoding='utf-8') 
-# file.write(user_equation)
-# file.close()
-
-# 5. Даны два файла, в каждом из которых находится запись многочлена.
-# Задача - сформировать файл, содержащий сумму многочленов.
-
-# Пример двух заданных многочленов:
-# 23x⁹ - 16x⁸ + 3x⁷ + 15x⁴ - 2x³ + x² + 20 = 0
-# 17x⁹ + 15x⁸ - 8x⁷ + 15x⁶ - 10x⁴ + 7x³ - 13x¹ + 33 = 0
-
-# Результат:
-# 40x⁹ - x⁸ -5x⁷ + 15x⁶ +5x⁴ + 5x³ + x² - 13x¹ + 53 = 0
-
-indexes = {"0": "\u2070",
+    indexes = {"0": "\u2070",
            "1": "\u00B9",
            "2": "\u00B2",
            "3": "\u00B3",
@@ -191,63 +117,61 @@ indexes = {"0": "\u2070",
            "6": "\u2076",
            "7": "\u2077",
            "8": "\u2078",
-           "9": "\u2079"
+           "9": "\u2079",
+           "-": "\u207B"
            }
-# Делаем из словаря список со значениями (без ключей)
 
-list_indexes = list(indexes.values())
-dictionary = {}
+    degrees = ""
+    temp = str(a)
+    for char in temp:
+        degrees += indexes[char] or ""
+    return degrees
 
-# Открываем файл, но, чтобы он правильно считывался, имеем в виду кодировку
+def generate_equation(k):
+    power_keys = []
+    for i in range(k, -1, -1):
+        power_keys.append(i)
+    
+    equation = ''
+    dictionary = dict.fromkeys(power_keys)
+    plus_minus = ['-', '+']
+    for key in dictionary:
+        dictionary[key] = random.randint(0, 5)
+        if dictionary[key] > 1 and key > 1:
+            equation += f'{str(dictionary[key])}x{degree(key)}{random.choice(plus_minus)}'
+        elif dictionary[key] == 1 and key > 1:
+            equation += f'x{degree(key)}{random.choice(plus_minus)}'
+        elif dictionary[key] > 1 and key == 1:
+            equation += f'{str(dictionary[key])}x{degree(key)}{random.choice(plus_minus)}'
+        elif dictionary[key] == 1 and key == 1:
+            equation += f'x{degree(key)}{random.choice(plus_minus)}' 
+        elif dictionary[key] > 1 and key == 0:
+            equation += f'{str(dictionary[key])}x{degree(key)}'
+        elif dictionary[key] == 0:
+            key -= 1
+    if equation[-1] == '0':
+        equation = equation[:-1]
+    elif equation[-1] == '+' or equation[-1] == '-':
+        equation = equation[:-1]              
+    equation += '=0'
 
+    return equation
+
+user_k1 = int(input("Введите натуральную степень k: "))
+user_k2 = int(input("Введите натуральную степень k: "))
+user_equation1 = generate_equation(user_k1)
+user_equation2 = generate_equation(user_k2) # Создаем два уравнения сразу для 5го задания
+
+print(user_equation1)
+print(user_equation2)
+
+# !!! Как записать в файл закодированную в UTF-8 строку !!!
 path = 'file4_1.txt'
-file = open(path, 'r', encoding='utf-8')
-char_list = ''
-for line in file:
-    for item in line:
-        char_list += item
+file = open(path, 'w', encoding='utf-8') 
+file.write(user_equation1)
+file.close()
 
-# Пройдемся по каждому элементу строки
-new_char_string = ''
-for item in range(0, len(char_list)):
-    if char_list[item] in list_indexes:
-        dictionary[char_list[item]] = None
-print(dictionary)
-
-digits = ''
-for element in char_list:
-    if (element.isdigit() == True and (not element in list_indexes)) or (element == '-'):
-        digits += element
-    else:
-        digits += ' '
-
-digits_list = digits.split(' ')
-digits_list.remove('0')
-
-coefficients = []
-for element in digits_list:
-    if element != '':
-        coefficients.append(element)
-for i in range(0, len(coefficients)):
-    if coefficients[i] == '-':
-        coefficients[i] = -1
-for i in range(0, len(coefficients)):
-    coefficients[i] = int(coefficients[i])
-print(coefficients)
-count = 0
-for i in dictionary:
-    for j in range(count, len(coefficients)):
-        dictionary[i] = coefficients[j]
-        count += 1
-        break
-        
-print(dictionary)
-# Конвертация
-# for item in range(0, len(char_list)):
-#   if char_list[item] in list_indexes:
-        # for j in range(0, len(list_indexes)):
-        #     if list_indexes[j] == char_list[item]:
-        #         new_char_string += str(j) # Перезаписываем в новую строку
-    # else:
-    #     new_char_string += char_list[item] 
-# print(new_char_string)
+path = 'file4_2.txt'
+file = open(path, 'w', encoding='utf-8') 
+file.write(user_equation2)
+file.close()
