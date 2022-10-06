@@ -196,7 +196,6 @@ indexes = {"0": "\u2070",
 # Делаем из словаря список со значениями (без ключей)
 
 list_indexes = list(indexes.values())
-print(list_indexes)
 dictionary = {}
 
 # Открываем файл, но, чтобы он правильно считывался, имеем в виду кодировку
@@ -207,7 +206,6 @@ char_list = ''
 for line in file:
     for item in line:
         char_list += item
-print(char_list)
 
 # Пройдемся по каждому элементу строки
 new_char_string = ''
@@ -236,6 +234,14 @@ for i in range(0, len(coefficients)):
 for i in range(0, len(coefficients)):
     coefficients[i] = int(coefficients[i])
 print(coefficients)
+count = 0
+for i in dictionary:
+    for j in range(count, len(coefficients)):
+        dictionary[i] = coefficients[j]
+        count += 1
+        break
+        
+print(dictionary)
 # Конвертация
 # for item in range(0, len(char_list)):
 #   if char_list[item] in list_indexes:
