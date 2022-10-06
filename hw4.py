@@ -106,6 +106,27 @@
 # Коэффициенты расставляет random, поэтому при коэффициенте 0 просто пропускаем данную итерацию степени
 import random
 
+def degree(a):
+    
+    indexes = {"0": "\u2070",
+           "1": "\u00B9",
+           "2": "\u00B2",
+           "3": "\u00B3",
+           "4": "\u2074",
+           "5": "\u2075",
+           "6": "\u2076",
+           "7": "\u2077",
+           "8": "\u2078",
+           "9": "\u2079",
+           "-": "\u207B"
+           }
+
+    degrees = ""
+    temp = str(a)
+    for char in temp:
+        degrees += indexes[char] or ""
+    return degrees
+
 def generate_equation(k):
     power_keys = []
     for i in range(k, -1, -1):
@@ -116,20 +137,26 @@ def generate_equation(k):
     plus_minus = ['-', '+']
     for key in dictionary:
         dictionary[key] = random.randint(0, 5)
-        if key == 0:
-            equation += f' {str(dictionary[key])} {random.choice(plus_minus)}'
-        elif key == 1:
-            equation += f' {str(dictionary[key])}x {random.choice(plus_minus)}'
-        else:
-            if dictionary[key] != 0:
-                if dictionary[key] == 1:
-                    equation += f' x**{key} {random.choice(plus_minus)}'
-                else:
-                    equation += f' {str(dictionary[key])}x**{key} {random.choice(plus_minus)}'
-    equation = equation[:-1] + '= 0'
-    print(dictionary)
+        if dictionary[key] > 1 and key > 1:
+            equation += f'{str(dictionary[key])}x{degree(key)}{random.choice(plus_minus)}'
+        elif dictionary[key] == 1 and key > 1:
+            equation += f'x{degree(key)}{random.choice(plus_minus)}'
+        elif dictionary[key] > 1 and key == 1:
+            equation += f'{str(dictionary[key])}x{random.choice(plus_minus)}'
+        elif dictionary[key] == 1 and key == 1:
+            equation += 'x'
+        elif dictionary[key] > 1 and key == 0:
+            equation += f'{str(dictionary[key])}'
+        elif dictionary[key] == 0:
+            key -= 1
+    if equation[-1] == '0':
+        equation = equation[:-3]
+    elif equation[-1] == '+' or '-':
+        equation = equation[:-2]              
+    equation += '=0'
 
     return equation
+
 
 
 user_k = int(input("Введите натуральную степень k: "))
