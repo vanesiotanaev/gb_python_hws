@@ -29,16 +29,47 @@
 
 # Второй вариант
 
-def accurate_value(value, accuracy):
-    decimal_places = 0
-    while accuracy < 1:
-        accuracy *= 10
-        decimal_places += 1
-    value = round(float(value), decimal_places)
+# def accurate_value(value, accuracy):
+#     decimal_places = 0
+#     while accuracy < 1:
+#         accuracy *= 10
+#         decimal_places += 1
+#     value = round(float(value), decimal_places)
     
-    return value
+#     return value
 
 
-user_value = -3.14159265
-user_accuracy = float(input('Введите желаемую точность d (от 0.1 до 0.0000000001): '))
-print(accurate_value(user_value, user_accuracy))
+# user_value = -3.14159265
+# user_accuracy = float(input('Введите желаемую точность d (от 0.1 до 0.0000000001): '))
+# print(accurate_value(user_value, user_accuracy))
+
+# 2. Задайте натуральное число N. Напишите программу, которая составит список простых множителей числа N.
+
+def prime_factors(N):
+    while N <= 0:
+        N = int(input(f'"{N}" не является натуральным числом! Введите натуральное число: ')) 
+    while N == 1:
+        N = int(input(f'"1" нельзя разложить на простые множители, т.к. у него всего один делитель! Введите натуральное число != 1: '))
+    list1 = []
+    for i in range(2, N+1):
+        list1.append(i)
+    list2 = []
+    for item in list1:
+        count = 0
+        for i in range(1, item+1):
+            if item % i == 0:
+                count += 1
+        if count == 2:
+            list2.append(item)
+    prime_factors = frozenset(list2)
+    list3 = []
+    for i in range(2, N+1):
+        if i in prime_factors and (N % i == 0):
+            list3.append(i)
+            
+    return list3
+
+
+
+user_value = int(input("Введите натуральное число, которое нужно разложить на простые множители: "))
+print(f'У числа {user_value} есть простые множители: {prime_factors(user_value)}')
