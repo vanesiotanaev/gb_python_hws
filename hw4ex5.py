@@ -173,19 +173,17 @@ def dict_to_string(dictionary):
 
 def modify_string(equation):
     clean_equation = ''
-    for i in range(len(equation)):
-        if equation[i] != "\u00B9":
+    for i in range(len(equation)-1):
+        if equation[i] != "\u00B9" and equation[i+1] != "\u2070" and equation[i] != "\u2070" and equation[i] != '0':
             clean_equation += equation[i]
+    clean_equation += '0'
     
-        # else:
-        #     clean_equation += "1"
-    print(clean_equation)
-    print(equation[len(equation)-5])
+    return clean_equation
 
 char_list_1 = open_encoded_file('file4_1.txt')
 char_list_2 = open_encoded_file('file4_2.txt')
-print(char_list_1)
-print(char_list_2)
+print(f'Подробная запись первого уравнения: {char_list_1}')
+print(f'Подробная запись второго уравнения: {char_list_2}')
 
 special_list = create_code_values_list()
 
@@ -206,18 +204,6 @@ summed_dict = sum_dicts(full_dict_1, full_dict_2)
 sorted_dictionary = dict_sort(summed_dict)
 
 semi_final_string = dict_to_string(sorted_dictionary)
-print(semi_final_string)
 
 final_string = modify_string(semi_final_string)
-
-
-
-# Конвертация
-# for item in range(0, len(char_list)):
-#   if char_list[item] in list_indexes:
-        # for j in range(0, len(list_indexes)):
-        #     if list_indexes[j] == char_list[item]:
-        #         new_char_string += str(j) # Перезаписываем в новую строку
-    # else:
-    #     new_char_string += char_list[item] 
-# print(new_char_string)
+print(f'Классическая запись общего уравнения: {final_string}')
