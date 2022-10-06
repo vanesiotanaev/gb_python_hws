@@ -119,12 +119,62 @@ def dict_sort(dict):
     sorted_dict = {k: v for k, v in sorted(dict.items())}
     items = list(sorted_dict.items())
     sorted_dict2 = {k: v for k, v in reversed(items)}
-    print(sorted_dict2)
     
     return sorted_dict2
 
+def degree(a):
+    
+    indexes = {"0": "\u2070",
+           "1": "\u00B9",
+           "2": "\u00B2",
+           "3": "\u00B3",
+           "4": "\u2074",
+           "5": "\u2075",
+           "6": "\u2076",
+           "7": "\u2077",
+           "8": "\u2078",
+           "9": "\u2079",
+           "-": "\u207B"
+           }
+
+    degrees = ""
+    temp = str(a)
+    for char in temp:
+        degrees += indexes[char] or ""
+    return degrees
+
+def dict_to_string(dictionary):
+    k = ''
+    for key, value in dictionary.items():
+    
+        if value == - 1:
+            k += f'- x{degree(key)} '
+        elif value == 1:
+            k += f'+ x{degree(key)} '
+        elif value < 0:
+            k += f'- {-value}x{degree(key)} '
+        elif value < 0 and int(key) == 0:
+            k += f'- {-value} '
+        elif value > 0 and int(key) == 0:
+            k += f'+ {value} '
+        else:
+            k += f'+ {value}x{degree(key)} '
+            
+    else:
+        k += '= 0'
+
+    if k[0] == '-':
+        final_string = k
+        print(k)
+    else:
+        final_string = k[2:]
+        
+        return final_string
+
 char_list_1 = open_encoded_file('file4_1.txt')
 char_list_2 = open_encoded_file('file4_2.txt')
+print(char_list_1)
+print(char_list_2)
 
 special_list = create_code_values_list()
 
@@ -139,14 +189,13 @@ secondary_coefficients_2 = create_secondary_coeff_list(primary_coefficients_2)
 
 full_dict_1 = create_complete_dict(dictionary_keys_1, secondary_coefficients_1)
 full_dict_2 = create_complete_dict(dictionary_keys_2, secondary_coefficients_2)
-print(full_dict_1)
-print(full_dict_2)
 
 summed_dict = sum_dicts(full_dict_1, full_dict_2)
-print(summed_dict)
 
 sorted_dictionary = dict_sort(summed_dict)
-print(sorted_dictionary)
+
+semi_final_string = dict_to_string(sorted_dictionary)
+print(semi_final_string)
 
 
 # Конвертация
