@@ -52,7 +52,7 @@ def computer_move(moves, dict, iter):
     if dict[5] == 'X' and iter == 0:
         list = [1, 3, 7, 9]
         bot_move = random.choice(list)
-    elif dict[5] != 'X' and dict[5] != 'O':
+    if dict[5] != 'X' and dict[5] != 'O':
         bot_move = 5
     else:
         if dict[1] == dict[4] == 'O' and (dict[7] != 'X' and dict[7] != 'O'):
@@ -103,7 +103,7 @@ def computer_move(moves, dict, iter):
             bot_move = 5
         elif dict[3] == dict[7] == 'O' and (dict[5] != 'X' and dict[5] != 'O'):
             bot_move = 5                      
-        if dict[1] == dict[4] == 'X' and (dict[7] != 'X' and dict[7] != 'O'):
+        elif dict[1] == dict[4] == 'X' and (dict[7] != 'X' and dict[7] != 'O'):
             bot_move = 7
         elif dict[4] == dict[7] == 'X' and (dict[1] != 'X' and dict[1] != 'O'):
             bot_move = 1
