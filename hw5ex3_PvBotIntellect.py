@@ -55,6 +55,54 @@ def computer_move(moves, dict, iter):
     elif dict[5] != 'X' and dict[5] != 'O':
         bot_move = 5
     else:
+        if dict[1] == dict[4] == 'O' and (dict[7] != 'X' and dict[7] != 'O'):
+            bot_move = 7
+        elif dict[4] == dict[7] == 'O' and (dict[1] != 'X' and dict[1] != 'O'):
+            bot_move = 1
+        elif dict[2] == dict[5] == 'O' and (dict[8] != 'X' and dict[8] != 'O'):
+            bot_move = 8
+        elif dict[5] == dict[8] == 'O' and (dict[2] != 'X' and dict [2] != 'O'):
+            bot_move = 2
+        elif dict[3] == dict[6] == 'O' and (dict[9] != 'X' and dict[9] != 'O'):
+            bot_move = 9
+        elif dict[6] == dict[9] == 'O' and (dict[3] != 'X' and dict[3] != 'O'):
+            bot_move = 3
+        elif dict[1] == dict[2] == 'O' and (dict[3] != 'X' and dict[3] != 'O'):
+            bot_move = 3
+        elif dict[2] == dict[3] == 'O' and (dict[1] != 'X' and dict[1] != 'O'):
+            bot_move = 1
+        elif dict[4] == dict[5] == 'O' and (dict[6] != 'X' and dict[6] != 'O'):
+            bot_move = 6
+        elif dict[5] == dict[6] == 'O' and (dict[4] != 'X' and dict[4] != 'O'):
+            bot_move = 4
+        elif dict[7] == dict[8] == 'O' and (dict[9] != 'X' and dict[9] != 'O'):
+            bot_move = 9
+        elif dict[8] == dict[9] == 'O' and (dict[7] != 'X' and dict[7] != 'O'):
+            bot_move = 7
+        elif dict[1] == dict[5] == 'O' and (dict[9] != 'X' and dict[9] != 'O'):
+            bot_move = 9
+        elif dict[5] == dict[9] == 'O' and (dict[1] != 'X' and dict[1] != 'O'):
+            bot_move = 1
+        elif dict[3] == dict[5] == 'O' and (dict[7] != 'X' and dict[7] != 'O') :
+            bot_move = 7
+        elif dict[5] == dict[7] == 'O' and (dict[3] != 'X' and dict[3] != 'O'):
+            bot_move = 3
+        elif dict[1] == dict[3] == 'O' and (dict[2] != 'X' and dict[2] != 'O'):
+            bot_move = 2
+        elif dict[4] == dict[6] == 'O' and (dict[5] != 'X' and dict[5] != 'O'):
+            bot_move = 5
+        elif dict[7] == dict[9] == 'O' and (dict[8] != 'X' and dict[8] != 'O'):
+            bot_move = 8
+        elif dict[1] == dict[7] == 'O' and (dict[4] != 'X' and dict[4] != 'O'):
+            bot_move = 4
+        elif dict[2] == dict[8] == 'O' and (dict[5] != 'X' and dict[5] != 'O'):
+            bot_move = 5
+        elif dict[3] == dict[9] == 'O' and (dict[6] != 'X' and dict[6] != 'O'):
+            bot_move = 6
+        elif dict[1] == dict[9] == 'O' and (dict[5] != 'X' and dict[5] != 'O'):
+            bot_move = 5
+        elif dict[3] == dict[7] == 'O' and (dict[5] != 'X' and dict[5] != 'O'):
+            bot_move = 5                      
         if dict[1] == dict[4] == 'X' and (dict[7] != 'X' and dict[7] != 'O'):
             bot_move = 7
         elif dict[4] == dict[7] == 'X' and (dict[1] != 'X' and dict[1] != 'O'):
