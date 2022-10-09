@@ -19,7 +19,7 @@ def game():
                 break
             # Ход компьютера
             if len(possible_moves) > 0:
-                computer_move(possible_moves, dictionary)
+                computer_move(dictionary, first_move(), count, possible_moves)
                 graphics(dictionary)
                 if win_check(dictionary) == True:
                     break
@@ -29,7 +29,7 @@ def game():
     else:
         # Ход компьютера
         while len(possible_moves) > 0:
-            computer_move(possible_moves, dictionary)
+            computer_move(dictionary, first_move(), count, possible_moves)
             graphics(dictionary)
             if win_check(dictionary) == True:
                 break
@@ -47,12 +47,12 @@ def game():
         else:
             print('Ничья!')
 
-def computer_move(moves, dict):
-    b = random.randint(1, 9)
-    while not str(b) in moves:
-        b = random.randint(1, 9)
-    moves.remove(str(b))
+def computer_move(dict, first, iter, moves):
+    b = bot_logic(dict, first, iter, moves)
     dict[b] = 'O'
+    print(dict[b])
+    print(dict)
+    moves.remove(str(b))
     print(f'Ход компьютера - позиция {b}!')
 
 def graphics(dict):
@@ -83,71 +83,41 @@ def win_check(dict):
 def bot_logic(dict, first, iter, moves):
     if first == 0 and dict[5] == 'X' and iter == 0:
         bot_move = random.choice (1, 3, 7, 9)
+    elif first == 1 and dict[5] != 'X':
+        bot_move = 5
     else:
         if dict[1] == dict[4] == 'X' and dict[7] != 'X':
-            bot_move = dict[7]
-            dict[7] = 'O'
-            moves.remove(dict[7])
+            bot_move = 7
         elif dict[4] == dict[7] == 'X' and dict[1] != 'X':
-            bot_move = dict[1]
-            dict[1] = 'O'
-            moves.remove(dict[1])
+            bot_move = 1
         elif dict[2] == dict[5] == 'X' and dict[8] != 'X':
-            bot_move = dict[8]
-            dict[8] = 'O'
-            moves.remove(dict[8])
+            bot_move = 8
         elif dict[5] == dict[8] == 'X' and dict[2] != 'X':
-            bot_move = dict[2]
-            dict[2] = 'O'
-            moves.remove(dict[2])
+            bot_move = 2
         elif dict[3] == dict[6] == 'X' and dict[9] != 'X':
-            bot_move = dict[9]
-            dict[9] = 'O'
-            moves.remove(dict[9])
+            bot_move = 9
         elif dict[6] == dict[9] == 'X' and dict[3] != 'X':
-            bot_move = dict[3]
-            dict[3] = 'O'
-            moves.remove(dict[3])
+            bot_move = 3
         elif dict[1] == dict[2] == 'X' and dict[3] != 'X':
-            bot_move = dict[3]
-            dict[3] = 'O'
-            moves.remove(dict[3])
+            bot_move = 3
         elif dict[2] == dict[3] == 'X' and dict[1] != 'X':
-            bot_move = dict[1]
-            dict[1] = 'O'
-            moves.remove(dict[1])
+            bot_move = 1
         elif dict[4] == dict[5] == 'X' and dict[6] != 'X':
-            bot_move = dict[6]
-            dict[6] = 'O'
-            moves.remove(dict[6])
+            bot_move = 6
         elif dict[5] == dict[6] == 'X' and dict[4] != 'X':
-            bot_move = dict[4]
-            dict[4] = 'O'
-            moves.remove(dict[4])
+            bot_move = 4
         elif dict[7] == dict[8] == 'X' and dict[9] != 'X':
-            bot_move = dict[9]
-            dict[9] = 'O'
-            moves.remove(dict[9])
+            bot_move = 9
         elif dict[8] == dict[9] == 'X' and dict[7] != 'X':
-            bot_move = dict[7]
-            dict[7] = 'O'
-            moves.remove(dict[7])
+            bot_move = 7
         elif dict[1] == dict[5] == 'X' and dict[9] != 'X':
-            bot_move = dict[9]
-            dict[9] = 'O'
-            moves.remove(dict[9])
+            bot_move = 9
         elif dict[5] == dict[9] == 'X' and dict[1] != 'X':
-            bot_move = dict[1]
-            dict[1] = 'O'
-            moves.remove(dict[1])
+            bot_move = 1
         elif dict[3] == dict[5] == 'X' and dict[7] != 'X':
-            bot_move = dict[7]
-            dict[7] = 'O'
-            moves.remove(dict[7])
+            bot_move = 7
         elif dict[5] == dict[7] == 'X' and dict[3] != 'X':
-            bot_move = dict[3]
-            dict[3] = 'O'
-            moves.remove(dict[3])               
+            bot_move = 3              
         else:
             bot_move = random.choice(moves)
     return bot_move
