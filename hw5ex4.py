@@ -44,10 +44,21 @@ def file_transformation(file):
         else:
             file[i] = letters_work(file[i])
     
-    print(file)
+    return file
+
+def file_write(path, text):
+    with open(path, 'w') as file:
+        for item in text:
+            file.write(item + '\n')
 
 path_1 = ('file5_4_1.txt')
 path_2 = ('file5_4_result.txt')
 file_1 = open_file(path_1)
-print(file_1)
-file_transformation(file_1)
+print(f'ДО преобразования: {file_1}')
+file_result = file_transformation(file_1)
+print(f'ПОСЛЕ преобразования: {file_result}')
+file_write(path_2, file_result)
+print()
+print('См. файлы "file5_4_1" и "file5_4_result" ! ')
+print()
+
