@@ -24,7 +24,6 @@ def game():
             else:
                 print("Игра окончена!")
 
-
 def human(sweets):
     recommended = sweets % 29
     if not recommended == 0:
